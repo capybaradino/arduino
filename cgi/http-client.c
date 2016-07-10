@@ -12,7 +12,7 @@
 #include <unistd.h>
 
 #define BUF_LEN 256                      /* バッファのサイズ */
-#define TEST_MESSAGE "{\"key\":\"value\"}"
+#define TEST_MESSAGE "{\"test\":\"test\"}"
 #define SESSIONID "SESSION-ID"
 #define SYMMETRICID "FHWIEORKVWVJOIJGEWFIWOSDLKFJWE"
 
