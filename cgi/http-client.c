@@ -14,7 +14,7 @@
 #define BUF_LEN 256                      /* バッファのサイズ */
 #define TEST_MESSAGE "{\"test\":\"test\"}"
 #define SESSIONID "SESSION-ID"
-#define SYMMETRICID "FHWIEORKVWVJOIJGEWFIWOSDLKFJWE"
+#include "secret.h"
 
 int main(int argc, char *argv[]){
     int s;                               /* ソケットのためのファイルディスクリプタ */
