@@ -1,6 +1,6 @@
 TARGETS=http-client
 SRCS=http-client.c
-SRCS_A=arduino.c Makefile_A
+SRCS_A=arduino.c secret.h Makefile_A
 OBJS=$(SRCS:.c=.o)
 
 all: $(TARGETS)

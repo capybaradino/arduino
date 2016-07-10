@@ -7,6 +7,8 @@
 #define REQUEST_METHOD "REQUEST_METHOD"
 #define DAT_FILE_PATH "/home/kame/cgi/data/arduino.dat"
 #define LOG_FILE_PATH "/home/kame/cgi/log/arduino.log"
+#define SESSIONID "HTTP_SESSION_ID"
+#include "secret.h"
 
 int error(int);
 //int main( int , char ** );
@@ -23,28 +25,51 @@ int main(void)
   printf( "Content-type: application/json\n\n" );
 
 	if ((fp = fopen(LOG_FILE_PATH, "w")) == NULL) {
-		error(3);
+		error(5);
 	}
 	putlog("main start");
+
+	if (getenv(SESSIONID)!=NULL)
+	{
+		char* sessionid = getenv(SESSIONID);
+		if (strcmp(sessionid, SYMMETRICID)==0)
+		{
+			putlog("valid session id");
+		}
+		else
+		{
+			putlog("invalid session id");
+			error(6);
+		}
+	}
+	else
+	{
+		putlog("session id is null");
+		error(3);
+	}
 	
 	if (getenv(CONTENT_LENGTH)!=NULL)
 	{
 		inLen = atoi(getenv(CONTENT_LENGTH));
+	}
+	else
+	{
+		putlog("content length is null");
+		error(4);
 	}
 	{
 		char s[256]; sprintf(s, "inLen=%d", inLen);
 		putlog(s);
 	}
 	if (inLen==0){
+		putlog("content length is 0");
 		error(1);
-		return;
 	}
 
 	putlog("trace -1");
 	pchBuf = (char *)calloc(inLen+1, sizeof(char));
 	if (!pchBuf){
 		error(2);
-		return;
 	}
 
 	char *pchBufTemp = pchBuf;
@@ -83,6 +108,7 @@ int main(void)
 //        printf( "\n\n" );
 //        printf( "Hello, world.\n" );
 	putlog("trace end");
+	return;
 }
 
 int error(int inErrorCode){
