@@ -1,16 +1,22 @@
-TARGETS=arduino
-SRCS=arduino.c
+LIB=
+LIBDIR=-L/home/kame/cgi
+INCDIR=-I/home/kame/cgi
+CFLAGS=
+TARGETS=arduino.cgi
+SRCS=arduino.c parson.c
 OBJS=$(SRCS:.c=.o)
 
 all: $(TARGETS)
 
 $(TARGETS): $(OBJS)
-	gcc -o $@.cgi $(OBJS)
-	cp $@.cgi cgi-bin/
+	gcc -o $@ $(OBJS) $(INCDIR) $(LIBDIR) $(LIB)
+	cp $@ cgi-bin/
 
 .c.o:
-	gcc -c $<
+	gcc -c $< $(INCDIR) $(LIBDIR) $(LIB)
 
-.PHONY: clean
+.PHONY: clean cleancgi
 clean:
-	$(RM) $(OBJS)
+	$(RM) $(OBJS) cgi-bin/$(TARGETS)
+cleancgi:
+	$(RM) cgi-bin/$(TARGETS)
