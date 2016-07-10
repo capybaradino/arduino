@@ -13,6 +13,8 @@
 
 #define BUF_LEN 256                      /* バッファのサイズ */
 #define TEST_MESSAGE "{\"key\":\"value\"}"
+#define SESSIONID "SESSION-ID"
+#define SYMMETRICID "FHWIEORKVWVJOIJGEWFIWOSDLKFJWE"
 
 int main(int argc, char *argv[]){
     int s;                               /* ソケットのためのファイルディスクリプタ */
@@ -104,6 +106,7 @@ int main(int argc, char *argv[]){
     sprintf(send_buf, "POST %s HTTP/1.0\r\n", path); write(s, send_buf, strlen(send_buf));
     sprintf(send_buf, "Host: %s:%d\r\n", host, port); write(s, send_buf, strlen(send_buf));
     sprintf(send_buf, "Content-Type: application/json\r\n"); write(s, send_buf, strlen(send_buf));
+		sprintf(send_buf, "%s: %s\r\n", SESSIONID, SYMMETRICID); write(s, send_buf, strlen(send_buf));
 
 		char* pchBody = TEST_MESSAGE;
 		int inCnt = 0;
