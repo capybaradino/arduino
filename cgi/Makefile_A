@@ -1,0 +1,16 @@
+TARGETS=arduino
+SRCS=arduino.c
+OBJS=$(SRCS:.c=.o)
+
+all: $(TARGETS)
+
+$(TARGETS): $(OBJS)
+	gcc -o $@.cgi $(OBJS)
+	cp $@.cgi cgi-bin/
+
+.c.o:
+	gcc -c $<
+
+.PHONY: clean
+clean:
+	$(RM) $(OBJS)
