@@ -23,8 +23,8 @@ int main(int argc, char *argv[]){
     struct servent *service;             /* サービス (http など) を扱うための構造体 */
 
     char send_buf[BUF_LEN];              /* サーバに送る HTTP プロトコル用バッファ */
-    char host[BUF_LEN] = "183.181.22.175";    /* 接続するホスト名 */
-    char path[BUF_LEN] = "/cgi-bin/arduino.cgi";            /* 要求するパス */
+    char host[BUF_LEN] = HOSTADDR;    /* 接続するホスト名 */
+    char path[BUF_LEN] = "/cgi-bin/arduino.cgi/AAA/BBB";            /* 要求するパス */
     unsigned short port = 80;            /* 接続するポート番号 */
 
     if ( argc > 1 ){                     /* URLが指定されていたら */
